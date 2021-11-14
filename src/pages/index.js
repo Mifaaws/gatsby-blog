@@ -57,7 +57,12 @@ const BlogIndex = ({ data, location }) => {
                       </Link>
                     </h2>
                     {/* <small>{post.frontmatter.date}</small> */}
-                    <small>{post.node.updatedAt}</small>
+                    <small>{post.node.createdAt}</small>
+                    <div>
+                      {post.node.tags.length > 0 && post.node.tags.map(tag => (
+                        <p className="post-list-item-tag"><span>{tag.title}</span></p>
+                      ))}
+                    </div>
                   </header>
                   <section>
                     <p
@@ -110,7 +115,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allContentfulPost {
+    allContentfulPost(sort: {fields: createdAt, order: DESC}, limit: 10) {
       edges {
         node {
           title
@@ -119,7 +124,7 @@ export const pageQuery = graphql`
               url
             }
           }
-          updatedAt(locale: "ja-JP", formatString: "YYYY-MM-DD")
+          createdAt(locale: "ja-JP", formatString: "YYYY-MM-DD")
           description {
             description
           }
@@ -128,6 +133,10 @@ export const pageQuery = graphql`
             childMarkdownRemark {
               excerpt
             }
+          }
+          tags {
+            title
+            slug
           }
         }
       }

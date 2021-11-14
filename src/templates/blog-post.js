@@ -30,6 +30,11 @@ const BlogPostTemplate = ({ data, location }) => {
           {/* <p>{post.frontmatter.date}</p> */}
           <h1 itemProp="headline">{post.title}</h1>
           <p>{post.createdAt}</p>
+          <div>
+            {post.tags.length > 0 && post.tags.map(tag => (
+              <p className="post-link-tag"><span>{tag.title}</span></p>
+            ))}
+          </div>
         </header>
         {post.image &&
           <div className="post-link-image">
@@ -151,6 +156,10 @@ export const pageQuery = graphql`
         file {
           url
         }
+      }
+      tags {
+        title
+        slug
       }
     }
     previous: contentfulPost(id: { eq: $previousPostId }) {
