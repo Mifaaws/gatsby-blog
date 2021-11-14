@@ -4,9 +4,9 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Euquid blog`,
+    title: `Euquid tech blog`,
     author: {
-      name: `ゆーたむ @ euquid`,
+      name: `ゆーたむ / euquid`,
       summary: `東京の会社員. 休日はWebエンジニア. 最近Reactやってる人.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
