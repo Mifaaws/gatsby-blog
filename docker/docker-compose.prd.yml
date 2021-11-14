@@ -1,0 +1,22 @@
+version: '3'
+
+networks:
+  default:
+    external:
+      name: shared
+
+services:
+  blog:
+    build: ./front
+    container_name: blog-front
+    tty: true
+    volumes:
+      - ../:/blog
+    working_dir: "/blog"
+    environment:
+      VIRTUAL_HOST: $VIRTUAL_HOST
+      LETSENCRYPT_HOST: $LETSENCRYPT_HOST
+      LETSENCRYPT_EMAIL: $LETSENCRYPT_EMAIL
+    ports:
+      - $LOCAL_PORT:8000
+
