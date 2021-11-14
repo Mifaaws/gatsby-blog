@@ -55,6 +55,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                 title
                 slug
               }
+              publishDate(locale: "ja-JP", formatString: "YYYY-MM-DD")
             }
           }
         }

@@ -10,6 +10,7 @@ const BlogPostTemplate = ({ data, location }) => {
   const post = data.contentfulPost
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
+  const date = post.publishDate || post.createdAt;
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -17,7 +18,6 @@ const BlogPostTemplate = ({ data, location }) => {
         // title={post.frontmatter.title}
         // description={post.frontmatter.description || post.excerpt}
         title={post.title}
-        // description={post.description.description}
         description={post.description ? post.description.description : post.body.childMarkdownRemark.excerpt}
       />
       <article
@@ -29,7 +29,7 @@ const BlogPostTemplate = ({ data, location }) => {
           {/* <h1 itemProp="headline">{post.frontmatter.title}</h1> */}
           {/* <p>{post.frontmatter.date}</p> */}
           <h1 itemProp="headline">{post.title}</h1>
-          <p>{post.createdAt}</p>
+          <p>{date}</p>
           <div>
             {post.tags.length > 0 && post.tags.map(tag => (
               <p className="post-link-tag"><span>{tag.title}</span></p>
@@ -161,6 +161,7 @@ export const pageQuery = graphql`
         title
         slug
       }
+      publishDate(locale: "ja-JP", formatString: "YYYY-MM-DD")
     }
     previous: contentfulPost(id: { eq: $previousPostId }) {
       slug

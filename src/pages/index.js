@@ -32,6 +32,7 @@ const BlogIndex = ({ data, location }) => {
         {posts.map(post => {
           // const title = post.frontmatter.title || post.fields.slug
           const title = post.node.title || post.node.fields.slug
+          const date = post.node.publishDate || post.node.createdAt;
 
           return (
             // <li key={post.fields.slug}>
@@ -57,7 +58,7 @@ const BlogIndex = ({ data, location }) => {
                       </Link>
                     </h2>
                     {/* <small>{post.frontmatter.date}</small> */}
-                    <small>{post.node.createdAt}</small>
+                    <small>{date}</small>
                     <div>
                       {post.node.tags.length > 0 && post.node.tags.map(tag => (
                         <p className="post-list-item-tag"><span>{tag.title}</span></p>
@@ -138,6 +139,7 @@ export const pageQuery = graphql`
             title
             slug
           }
+          publishDate(locale: "ja-JP", formatString: "YYYY-MM-DD")
         }
       }
     }

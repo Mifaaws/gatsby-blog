@@ -6,8 +6,8 @@ module.exports = {
   siteMetadata: {
     title: `Euquid blog`,
     author: {
-      name: `Euquid`,
-      summary: `Web programming, IT Infrastructure and so on.`,
+      name: `ゆーたむ @ euquid`,
+      summary: `東京の会社員. 休日はWebエンジニア. 最近Reactやってる人.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://blog.euquid.com/`,
