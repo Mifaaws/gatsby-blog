@@ -7,23 +7,23 @@ module.exports = {
     title: `Lifework a holic`,
     author: {
       name: `Euquid`,
-      summary: `Studying web programming, IT Infrastructure and so on.`,
+      summary: `Web programming, IT Infrastructure and so on.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    siteUrl: `https://blog.euquid.com/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `euquid`,
     },
   },
   plugins: [
     `gatsby-plugin-image`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/content/blog`,
-        name: `blog`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     path: `${__dirname}/content/blog`,
+    //     name: `blog`,
+    //   },
+    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

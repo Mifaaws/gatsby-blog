@@ -31,6 +31,11 @@ const BlogPostTemplate = ({ data, location }) => {
           <h1 itemProp="headline">{post.title}</h1>
           <p>{post.createdAt}</p>
         </header>
+        {post.image &&
+          <div className="post-link-image">
+            <img src={post.image.file.url} alt="post-cover"></img>
+          </div>
+        }
         <section
           // dangerouslySetInnerHTML={{ __html: post.html }}
           dangerouslySetInnerHTML={{ __html: post.body.childMarkdownRemark.html }}
@@ -141,6 +146,11 @@ export const pageQuery = graphql`
       createdAt(locale: "ja-JP", formatString: "YYYY-MM-DD")
       description {
         description
+      }
+      image {
+        file {
+          url
+        }
       }
     }
     previous: contentfulPost(id: { eq: $previousPostId }) {

@@ -41,25 +41,34 @@ const BlogIndex = ({ data, location }) => {
                 itemScope
                 itemType="http://schema.org/Article"
               >
-                <header>
-                  <h2>
-                    {/* <Link to={post.fields.slug} itemProp="url"> */}
+                <div>
+                  {post.node.image &&
                     <Link to={post.node.slug} itemProp="url">
-                      <span itemProp="headline">{title}</span>
+                      <img src={post.node.image.file.url} className="post-list-item-image" alt="post-cover"></img>
                     </Link>
-                  </h2>
-                  {/* <small>{post.frontmatter.date}</small> */}
-                  <small>{post.node.updatedAt}</small>
-                </header>
-                <section>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      // __html: post.frontmatter.description || post.excerpt,
-                      __html: post.node.description ? post.node.description.description : post.node.body.childMarkdownRemark.excerpt,
-                    }}
-                    itemProp="description"
-                  />
-                </section>
+                  }
+                </div>
+                <div>
+                  <header>
+                    <h2>
+                      {/* <Link to={post.fields.slug} itemProp="url"> */}
+                      <Link to={post.node.slug} itemProp="url">
+                        <span itemProp="headline">{title}</span>
+                      </Link>
+                    </h2>
+                    {/* <small>{post.frontmatter.date}</small> */}
+                    <small>{post.node.updatedAt}</small>
+                  </header>
+                  <section>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        // __html: post.frontmatter.description || post.excerpt,
+                        __html: post.node.description ? post.node.description.description : post.node.body.childMarkdownRemark.excerpt,
+                      }}
+                      itemProp="description"
+                    />
+                  </section>
+                </div>
               </article>
             </li>
           )
