@@ -13,6 +13,7 @@ services:
       - ../:/blog
     working_dir: "/blog"
     ports:
-      - $LOCAL_PORT:8000
+      - $LOCAL_DEV_PORT:8000
+      - $LOCAL_PRD_PORT:9000
     # networks:
     #   - react_express

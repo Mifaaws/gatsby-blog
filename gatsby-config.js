@@ -84,32 +84,63 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.nodes.map(node => {
-                return Object.assign({}, node.frontmatter, {
-                  description: node.excerpt,
-                  date: node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + node.fields.slug,
-                  custom_elements: [{ "content:encoded": node.html }],
+            // serialize: ({ query: { site, allMarkdownRemark } }) => {
+            //   return allMarkdownRemark.nodes.map(node => {
+            //     return Object.assign({}, node.frontmatter, {
+            //       description: node.excerpt,
+            //       date: node.frontmatter.date,
+            //       url: site.siteMetadata.siteUrl + node.fields.slug,
+            //       guid: site.siteMetadata.siteUrl + node.fields.slug,
+            //       custom_elements: [{ "content:encoded": node.html }],
+            //     })
+            //   })
+            // },
+            // query: `
+            //   {
+            //     allMarkdownRemark(
+            //       sort: { order: DESC, fields: [frontmatter___date] },
+            //     ) {
+            //       nodes {
+            //         excerpt
+            //         html
+            //         fields {
+            //           slug
+            //         }
+            //         frontmatter {
+            //           title
+            //           date
+            //         }
+            //       }
+            //     }
+            //   }
+            // `,
+            serialize: ({ query: { site, allContentfulPost } }) => {
+              return allContentfulPost.nodes.map(node => {
+                return Object.assign({}, node, {
+                  description: node.description ? node.description.description : node.body.childMarkdownRemark.excerpt,
+                  date: node.publishDate ? node.publishDate : node.createdAt,
+                  url: site.siteMetadata.siteUrl + node.slug,
+                  guid: site.siteMetadata.siteUrl + node.slug,
+                  custom_elements: [{ "content:encoded": node.body.childMarkdownRemark.html }],
                 })
               })
             },
             query: `
               {
-                allMarkdownRemark(
-                  sort: { order: DESC, fields: [frontmatter___date] },
-                ) {
+                allContentfulPost(sort: {order: DESC, fields: createdAt}) {
                   nodes {
-                    excerpt
-                    html
-                    fields {
-                      slug
+                    body {
+                      childMarkdownRemark {
+                        excerpt
+                        html
+                      }
                     }
-                    frontmatter {
-                      title
-                      date
+                    slug
+                    description {
+                      description
                     }
+                    createdAt
+                    publishDate
                   }
                 }
               }
