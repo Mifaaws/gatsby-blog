@@ -33,7 +33,11 @@ const BlogPostTemplate = ({ data, location }) => {
           <h1 itemProp="headline">{post.title}</h1>
           <div>
             {post.tags.length > 0 && post.tags.map(tag => (
-              <p className="post-link-tag"><span>{tag.title}</span></p>
+              <p className="post-link-tag">
+                <Link to={`/tags/${tag.slug}/`}>
+                  <span>{tag.title}</span>
+                </Link>
+              </p>
             ))}
           </div>
         </header>
@@ -43,7 +47,7 @@ const BlogPostTemplate = ({ data, location }) => {
           itemProp="articleBody"
         />
         <hr className="solid-hr" />
-        <RelatedPosts pNum={5} id={post.id} tags={post.tags} />
+        <RelatedPosts pNum={3} id={post.id} tags={post.tags} />
         <hr className="solid-hr" />
         <footer>
           <Bio />

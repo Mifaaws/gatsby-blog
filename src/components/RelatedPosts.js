@@ -42,15 +42,16 @@ const RelatedPosts = (props) => {
   `)
 
   const basePosts = data.allContentfulPost.nodes.filter((node) => {
-    // return node.id !== props.id && node.tags.map(tag => tag.title)[0] === props.tags[0].title
-    return node.id !== props.id
+    return node.id !== props.id && node.tags.map(tag => tag.title)[0] === props.tags[0].title
   });
-  const relatedPosts = randomSelect(basePosts, props.pNum);
+  let relatedPosts = randomSelect(basePosts, props.pNum);
 
-  console.log(basePosts)  
-
+  // If no posts of the same tag, add randam posts.
   if (!relatedPosts.length) {
-    return null;
+    const basePosts2 = data.allContentfulPost.nodes.filter((node) => {
+      return node.id !== props.id;
+    });
+    relatedPosts = randomSelect(basePosts2, props.pNum - relatedPosts.length);
   }
 
   return (
