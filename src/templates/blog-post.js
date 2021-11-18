@@ -27,29 +27,24 @@ const BlogPostTemplate = ({ data, location }) => {
         itemType="http://schema.org/Article"
       >
         <header>
+          <p>{date}</p>
           {/* <h1 itemProp="headline">{post.frontmatter.title}</h1> */}
           {/* <p>{post.frontmatter.date}</p> */}
           <h1 itemProp="headline">{post.title}</h1>
-          <p>{date}</p>
           <div>
             {post.tags.length > 0 && post.tags.map(tag => (
               <p className="post-link-tag"><span>{tag.title}</span></p>
             ))}
           </div>
         </header>
-        {post.image &&
-          <div className="post-link-image">
-            <img src={post.image.file.url} alt="post-cover"></img>
-          </div>
-        }
         <section
           // dangerouslySetInnerHTML={{ __html: post.html }}
           dangerouslySetInnerHTML={{ __html: post.body.childMarkdownRemark.html }}
           itemProp="articleBody"
         />
-        <hr />
+        <hr className="solid-hr" />
         <RelatedPosts pNum={5} id={post.id} tags={post.tags} />
-        <hr />
+        <hr className="solid-hr" />
         <footer>
           <Bio />
         </footer>

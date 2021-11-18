@@ -45,22 +45,16 @@ const BlogIndex = ({ data, location }) => {
                 itemType="http://schema.org/Article"
               >
                 <div>
-                  {post.node.image &&
-                    <Link to={post.node.slug} itemProp="url">
-                      <img src={post.node.image.file.url} className="post-list-item-image" alt="post-cover"></img>
-                    </Link>
-                  }
-                </div>
-                <div>
                   <header>
+                    <small>{date}</small>
                     <h2>
                       {/* <Link to={post.fields.slug} itemProp="url"> */}
                       <Link to={post.node.slug} itemProp="url">
                         <span itemProp="headline">{title}</span>
                       </Link>
                     </h2>
+                    <hr />
                     {/* <small>{post.frontmatter.date}</small> */}
-                    <small>{date}</small>
                     <div>
                       {post.node.tags.length > 0 && post.node.tags.map(tag => (
                         <p className="post-list-item-tag"><span>{tag.title}</span></p>
@@ -82,7 +76,7 @@ const BlogIndex = ({ data, location }) => {
           )
         })}
       </ol>
-      <hr />
+      <hr className="solid-hr" />
       <footer>
         <Bio />
       </footer>

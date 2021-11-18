@@ -66,20 +66,13 @@ const RelatedPosts = (props) => {
                 itemType="http://schema.org/Article"
               >
                 <div>
-                  {node.image &&
-                    <Link to={`/${node.slug}`} itemProp="url">
-                      <img src={node.image.file.url} className="related-post-image" alt="post-cover"></img>
-                    </Link>
-                  }
-                </div>
-                <div>
                   <header>
+                    <small>{node.publishDate || node.createdAt}</small>
                     <h4>
                       <Link to={`/${node.slug}`} itemProp="url">
                         <span itemProp="headline">{node.title}</span>
                       </Link>
                     </h4>
-                    <small>{node.publishDate || node.createdAt}</small>
                   </header>
                   <section>
                     <p
