@@ -1,11 +1,13 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
+const { paginate } = require("gatsby-awesome-pagination")
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
   // Define a template for blog post
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
+  const blogPost = path.resolve(`./src/templates/blog-post.js`);
+  const tagTemplate = path.resolve(`./src/templates/tags.js`)
 
   // // Get all markdown blog posts sorted by date
   // const result = await graphql(
@@ -30,7 +32,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(
     `
       {
-        allContentfulPost(sort: {fields: createdAt, order: DESC}, limit: 10) {
+        allContentfulPost(sort: {fields: createdAt, order: DESC}) {
           edges {
             node {
               id
@@ -59,6 +61,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
           }
         }
+        allContentfulTags {
+          edges {
+            node {
+              slug
+              title
+            }
+          }
+        }
       }
     `
   )
@@ -73,6 +83,29 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // const posts = result.data.allMarkdownRemark.nodes
   const posts = result.data.allContentfulPost.edges
+
+  // Pagination
+  paginate({
+    createPage,
+    items: posts,
+    itemsPerPage: 10,
+    component: path.resolve("src/templates/index.js"),
+    pathPrefix: ({ pageNumber }) => (
+      pageNumber === 0 ? "/" : "/page"
+    )
+  })
+
+  // Tags
+  const tags = result.data.allContentfulTags.edges
+  tags.forEach(tag => {
+    createPage({
+      path: `/tags/${tag.node.slug}/`,
+      component: tagTemplate,
+      context: {
+        tag: tag.node.title,
+      },
+    })
+  }) 
 
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)

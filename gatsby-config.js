@@ -7,7 +7,7 @@ module.exports = {
     title: `Euquid tech blog`,
     author: {
       name: `ゆーたむ / Web Engineer`,
-      summary: `東京の会社員. 本業はAWSがメイン. 最近Reactやってる人.`,
+      summary: `東京の会社員. 本業はサーバサイド (AWS / Node) . 最近Reactやってる人.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://blog.euquid.com/`,
@@ -47,7 +47,17 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-prismjs`,
+          'gatsby-remark-prismjs-title',
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: "language-",
+              inlineCodeMarker: null,
+              aliases: {},
+              showLineNumbers: false,
+              noInlineHighlight: false,
+            },
+          },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],
