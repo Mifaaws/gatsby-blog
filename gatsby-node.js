@@ -1,5 +1,6 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
+const { paginate } = require("gatsby-awesome-pagination")
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
@@ -30,7 +31,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(
     `
       {
-        allContentfulPost(sort: {fields: createdAt, order: DESC}, limit: 10) {
+        allContentfulPost(sort: {fields: createdAt, order: DESC}) {
           edges {
             node {
               id
@@ -73,6 +74,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // const posts = result.data.allMarkdownRemark.nodes
   const posts = result.data.allContentfulPost.edges
+
+  // pagination
+  paginate({
+    createPage,
+    items: posts,
+    itemsPerPage: 10,
+    component: path.resolve("src/templates/index.js"),
+    pathPrefix: ({ pageNumber }) => (
+      pageNumber === 0 ? "/" : "/page"
+    )
+  })
 
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)

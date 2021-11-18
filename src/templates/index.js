@@ -5,7 +5,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-const BlogIndex = ({ data, location }) => {
+const BlogIndex = ({ data, location, pageContext }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   // const posts = data.allMarkdownRemark.nodes
   const posts = data.allContentfulPost.edges
@@ -76,6 +76,32 @@ const BlogIndex = ({ data, location }) => {
           )
         })}
       </ol>
+      <nav className="blog-list-nav">
+        <ul
+          style={{
+            display: `flex`,
+            flexWrap: `wrap`,
+            justifyContent: `space-between`,
+            listStyle: `none`,
+            padding: 0,
+          }}
+        >
+          <li>
+            {pageContext.previousPagePath && (
+              <Link to={pageContext.previousPagePath} rel="prev">
+                ← Newer
+              </Link>
+            )}
+          </li>
+          <li>
+            {pageContext.nextPagePath && (
+              <Link to={pageContext.nextPagePath} rel="next">
+                Older →
+              </Link>
+            )}
+          </li>
+        </ul>
+      </nav>
       <hr className="solid-hr" />
       <footer>
         <Bio />
@@ -110,13 +136,13 @@ export default BlogIndex
 // `
 
 export const pageQuery = graphql`
-  query {
+  query($skip: Int!, $limit: Int!) {
     site {
       siteMetadata {
         title
       }
     }
-    allContentfulPost(sort: {fields: createdAt, order: DESC}, limit: 10) {
+    allContentfulPost(sort: {fields: createdAt, order: DESC}, skip: $skip, limit: $limit) {
       edges {
         node {
           title
