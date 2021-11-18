@@ -362,6 +362,11 @@ a:focus {
   border-radius: 10%;
 }
 
+.bio img {
+  margin-top: var(--spacing-0) !important;
+  margin-bottom: var(--spacing-0) !important;
+}
+
 .blog-post header {
   margin-bottom: var(--spacing-6);
 }
