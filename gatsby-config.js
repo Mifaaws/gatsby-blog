@@ -47,7 +47,7 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          'gatsby-remark-prismjs-title',
+          'gatsby-remark-prismjs-title',  // Codeblock's file name
           {
             resolve: `gatsby-remark-prismjs`,
             options: {

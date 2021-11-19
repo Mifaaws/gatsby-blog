@@ -395,6 +395,16 @@ a:focus {
   margin-left: var(--spacing-6);
 }
 
+/* Apply new line as like Contentful */
+.blog-post > section > p {
+  white-space: pre-wrap;
+}
+
+.blog-post > section > p * {
+  white-space: normal;
+}
+/*  */
+
 .post-link-tag {
   display: inline-block;
   font-family: var(--font-heading);
