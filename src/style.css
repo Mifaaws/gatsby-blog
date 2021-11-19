@@ -415,6 +415,7 @@ a:focus {
 /* Apply new line as like Contentful */
 .blog-post > section > p {
   white-space: pre-wrap;
+  margin-bottom: var(--spacing-4);
 }
 
 .blog-post > section > p * {
