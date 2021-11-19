@@ -49,7 +49,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
                     <small>{date}</small>
                     <h2>
                       {/* <Link to={post.fields.slug} itemProp="url"> */}
-                      <Link to={post.node.slug} itemProp="url">
+                      <Link to={`/${post.node.slug}/`} itemProp="url">
                         <span itemProp="headline">{title}</span>
                       </Link>
                     </h2>

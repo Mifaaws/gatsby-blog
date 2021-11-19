@@ -367,8 +367,8 @@ a:focus {
 }
 
 .bio img {
-  margin-top: var(--spacing-0) !important;
-  margin-bottom: var(--spacing-0) !important;
+  margin: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-0) !important;
+  max-width: 100% !important;
 }
 
 .blog-post header {
@@ -389,6 +389,10 @@ a:focus {
   margin-bottom: var(--spacing-6);
   max-width: 80%;
   max-height: 450px;
+}
+
+.blog-post section ul {
+  margin-left: var(--spacing-6);
 }
 
 .post-link-tag {

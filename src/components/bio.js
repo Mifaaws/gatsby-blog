@@ -36,7 +36,7 @@ const Bio = () => {
         className="bio-avatar"
         layout="fixed"
         formats={["auto", "webp", "avif"]}
-        src="../images/profile-nasu.jpg"
+        src="../images/profile-smile.png"
         width={50}
         height={50}
         quality={95}
