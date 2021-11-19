@@ -391,6 +391,10 @@ a:focus {
   max-height: 450px;
 }
 
+.blog-post section {
+  margin-bottom: var(--spacing-10);
+}
+
 .blog-post section ul {
   margin-left: var(--spacing-6);
 }
