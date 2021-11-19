@@ -60,6 +60,8 @@
   --color-heading: #1a202c;
   --color-heading-black: black;
   --color-accent: #d1dce5;
+  --color-code-text: #1a202c;
+  --color-code-bg: #d1dce5;
 }
 
 /* HTML elements */
@@ -402,6 +404,12 @@ a:focus {
 
 .blog-post section ul {
   margin-left: var(--spacing-6);
+}
+
+.blog-post code.language-text:not(pre code.language-text) {
+  color: var(--color-code-text);
+  background-color: var(--color-code-bg);
+  padding: 0 var(--spacing-1);
 }
 
 /* Apply new line as like Contentful */
