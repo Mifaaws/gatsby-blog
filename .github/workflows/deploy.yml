@@ -22,7 +22,8 @@ jobs:
         run: npm run build
         env:
           GATSBY_CONTENTFUL_API_KEY: ${{ secrets.GATSBY_CONTENTFUL_API_KEY }}
-          GATSBY_CONTENTFUL_SPACE_ID: ${{ secrets.GATSBY_CONTENTFUL_SPACE_ID }}          
+          GATSBY_CONTENTFUL_SPACE_ID: ${{ secrets.GATSBY_CONTENTFUL_SPACE_ID }}
+          GATSBY_GA_TRACKING_ID: ${{ secrets.GATSBY_GA_TRACKING_ID }}
       - name: Generate ssh key
         run: |
           mkdir -p ~/.ssh/
