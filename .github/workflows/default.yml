@@ -1,0 +1,51 @@
+name: Deploy Action
+
+on:
+  # push:
+  #   branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  print-hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: ls
+        run: ls -ltr
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '14'
+      # - run: npm install
+      - name: Generate ssh key
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Rsync
+        run: rsync -rlptgoD --delete --exclude ".git/" -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p ${SSH_PORT}" ./ $SSH_USER@$SSH_HOST:$DEPLOY_PATH
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+      - name: SSH and Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          script_stop: true
+          script: |
+            cd ~/work/actions-test/docker
+            docker-compose down
+            docker-compose up -d
+            docker exec -u node front rm -rf node_modules package-lock.json
+            docker exec -u node front npm install
+            docker exec -u node front ls -ltr
+            docker exec -u node -d front nohup npm start
+        # env:
+        #   DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
