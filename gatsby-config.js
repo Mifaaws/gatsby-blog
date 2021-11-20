@@ -9,7 +9,7 @@ module.exports = {
       name: `ゆーたむ / Web Engineer`,
       summary: `東京の会社員. 本業はサーバサイド (AWS / Node) . 最近Reactやってる人.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    description: `Webエンジニアの技術ブログ。日々学んだことの備忘録です。Node.js, Typescript, React, Gatsby, AWS, Linuxなど。`,
     siteUrl: `https://blog.euquid.com/`,
     social: {
       twitter: `euquid`,
