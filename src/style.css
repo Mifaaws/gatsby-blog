@@ -421,6 +421,12 @@ a:focus {
 .blog-post > section > p * {
   white-space: normal;
 }
+
+.blog-post .iframely-responsive {
+  width: 60%;
+  margin: var(--spacing-4) 0;
+}
+
 /*  */
 
 .post-link-tag {

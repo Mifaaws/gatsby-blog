@@ -6,6 +6,8 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import RelatedPosts from "../components/RelatedPosts"
 
+import Iframely from "../components/iframely"
+
 const BlogPostTemplate = ({ data, location }) => {
   // const post = data.markdownRemark
   const post = data.contentfulPost
@@ -15,6 +17,7 @@ const BlogPostTemplate = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
+      <Iframely />
       <Seo
         // title={post.frontmatter.title}
         // description={post.frontmatter.description || post.excerpt}
