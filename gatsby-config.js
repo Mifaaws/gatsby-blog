@@ -10,10 +10,10 @@ module.exports = {
       summary: `東京の会社員. 本業はサーバサイド (AWS / Node) . 最近Reactやってる人.`,
     },
     description: `Webエンジニアの技術ブログ。日々学んだことの備忘録です。Node.js, Typescript, React, Gatsby, AWS, Linuxなど。`,
-    siteUrl: `https://blog.euquid.com/`,
-    social: {
-      twitter: `euquid`,
-    },
+    siteUrl: `https://blog.euquid.com`,
+    // social: {
+    //   twitter: `euquid`,
+    // },
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -175,6 +175,7 @@ module.exports = {
         icon: `src/images/splotch.png`, // This path is relative to the root of the site.
       },
     },
+    `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
@@ -185,6 +186,13 @@ module.exports = {
         spaceId: process.env.GATSBY_CONTENTFUL_SPACE_ID,
         accessToken: process.env.GATSBY_CONTENTFUL_API_KEY
       }
-    }
+    },
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://blog.euquid.com`,
+        stripQueryString: true,
+      },
+    },
   ],
 }
