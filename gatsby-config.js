@@ -197,8 +197,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: siteUrl,
-        sitemap: `${siteUrl}/sitemap/sitemap-index.xml`,
+        host: `https://blog.euquid.com`,
+        sitemap: `https://blog.euquid.com/sitemap/sitemap-index.xml`,
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },
