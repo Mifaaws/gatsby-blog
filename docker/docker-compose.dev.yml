@@ -7,7 +7,7 @@ version: '3'
 services:
   blog:
     build: ./front
-    container_name: front
+    container_name: blog
     tty: true
     volumes:
       - ../:/blog
